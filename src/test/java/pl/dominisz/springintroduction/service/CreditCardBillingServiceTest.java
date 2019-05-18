@@ -36,4 +36,14 @@ public class CreditCardBillingServiceTest {
         Assertions.assertTrue(receipt.isSuccessful());
         Assertions.assertEquals(new BigDecimal("8.58"), receipt.getAmount());
     }
+
+    @Test
+    void shouldDeclineCharge() {
+        //TODO zaimplementować
+    }
+
+    @Test
+    void shouldFailCharge() {
+        //TODO zaimplementować
+    }
 }
