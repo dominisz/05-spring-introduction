@@ -12,11 +12,6 @@ import java.time.LocalDate;
 public class Application {
 
     public static void main(String[] args) {
-
-        CreditCardProcessor creditCardProcessor = new PaypalCreditCardProcessor();
-        TransactionLog transactionLog = new DatabaseTransactionLog();
-        BillingService billingService = new CreditCardBillingService(creditCardProcessor, transactionLog);
-
         Order order = new Order();
         OrderItem hotDog = new OrderItem("Hot dog", new BigDecimal("3.59"));
         OrderItem coffee = new OrderItem("Coffee", new BigDecimal("4.99"));
@@ -25,6 +20,9 @@ public class Application {
 
         CreditCard creditCard = new CreditCard("Imie", "Nazwisko", "123", LocalDate.of(2022, 5, 1));
 
+        ApplicationContext context = new AnnotationConfigApplicationContext(Application.class);
+
+        CreditCardBillingService billingService = context.getBean(CreditCardBillingService.class);
         Receipt receipt = billingService.chargeOrder(order, creditCard);
 
         System.out.println(receipt);
