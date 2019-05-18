@@ -2,7 +2,6 @@ package pl.dominisz.springintroduction.service;
 
 public class CreditCardBillingService implements BillingService {
 
-    @Override
     public Receipt chargeOrder(Order order, CreditCard creditCard) {
         CreditCardProcessor processor = new PaypalCreditCardProcessor();
         TransactionLog transactionLog = new DatabaseTransactionLog();
