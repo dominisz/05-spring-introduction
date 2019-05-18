@@ -5,11 +5,20 @@ package pl.dominisz.springintroduction.model;
  * 18.05.2019
  */
 public class ChargeResult {
-    public boolean wasSuccessful() {
-        return false;
+
+    private boolean successful;
+    private String message;
+
+    public ChargeResult(boolean successful, String message) {
+        this.successful = successful;
+        this.message = message;
+    }
+
+    public boolean isSuccessful() {
+        return successful;
     }
 
     public String getDeclineMessage() {
-        return null;
+        return message;
     }
 }
