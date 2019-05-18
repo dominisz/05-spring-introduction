@@ -1,5 +1,8 @@
 package pl.dominisz.springintroduction;
 
+import pl.dominisz.springintroduction.model.CreditCard;
+import pl.dominisz.springintroduction.model.Order;
+import pl.dominisz.springintroduction.model.Receipt;
 import pl.dominisz.springintroduction.service.*;
 
 public class Application {

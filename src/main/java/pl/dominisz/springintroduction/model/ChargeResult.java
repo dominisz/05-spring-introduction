@@ -1,4 +1,4 @@
-package pl.dominisz.springintroduction.service;
+package pl.dominisz.springintroduction.model;
 
 /**
  * http://dominisz.pl

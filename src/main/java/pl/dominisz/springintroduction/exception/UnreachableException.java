@@ -1,4 +1,4 @@
-package pl.dominisz.springintroduction.service;
+package pl.dominisz.springintroduction.exception;
 
 /**
  * http://dominisz.pl
