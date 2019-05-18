@@ -1,21 +1,24 @@
-package pl.dominisz.springintroduction;
+package pl.dominisz.springintroduction.service;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import pl.dominisz.springintroduction.model.CreditCard;
 import pl.dominisz.springintroduction.model.Order;
 import pl.dominisz.springintroduction.model.OrderItem;
 import pl.dominisz.springintroduction.model.Receipt;
-import pl.dominisz.springintroduction.service.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Application {
+/**
+ * http://dominisz.pl
+ * 18.05.2019
+ */
+public class CreditCardBillingServiceTest {
 
-    public static void main(String[] args) {
-
-        CreditCardProcessor creditCardProcessor = new PaypalCreditCardProcessor();
-        TransactionLog transactionLog = new DatabaseTransactionLog();
-        BillingService billingService = new CreditCardBillingService(creditCardProcessor, transactionLog);
+    @Test
+    void shouldSuccessfullyChargeCard() {
+        CreditCardBillingService creditCardBillingService = new CreditCardBillingService();
 
         Order order = new Order();
         OrderItem hotDog = new OrderItem("Hot dog", new BigDecimal("3.59"));
@@ -25,9 +28,9 @@ public class Application {
 
         CreditCard creditCard = new CreditCard("Imie", "Nazwisko", "123", LocalDate.of(2022, 5, 1));
 
-        Receipt receipt = billingService.chargeOrder(order, creditCard);
+        Receipt receipt = creditCardBillingService.chargeOrder(order, creditCard);
 
-        System.out.println(receipt);
+        Assertions.assertTrue(receipt.isSuccessful());
+        Assertions.assertEquals(new BigDecimal("8.58"), receipt.getAmount());
     }
-
 }
