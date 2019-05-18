@@ -1,5 +1,8 @@
 package pl.dominisz.springintroduction.service;
 
+import pl.dominisz.springintroduction.exception.UnreachableException;
+import pl.dominisz.springintroduction.model.*;
+
 public class CreditCardBillingService implements BillingService {
 
     public Receipt chargeOrder(Order order, CreditCard creditCard) {
@@ -10,9 +13,9 @@ public class CreditCardBillingService implements BillingService {
             ChargeResult result = processor.charge(creditCard, order.getAmount());
             transactionLog.logChargeResult(result);
 
-            return result.wasSuccessful()
+            return result.isSuccessful()
                     ? Receipt.forSuccessfulCharge(order.getAmount())
-                    : Receipt.forDeclinedCharge(result.getDeclineMessage());
+                    : Receipt.forDeclinedCharge(result.getMessage());
         } catch (UnreachableException e) {
             transactionLog.logConnectException(e);
             return Receipt.forSystemFailure(e.getMessage());

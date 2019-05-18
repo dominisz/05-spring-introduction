@@ -1,6 +1,11 @@
 package pl.dominisz.springintroduction;
 
+import pl.dominisz.springintroduction.model.CreditCard;
+import pl.dominisz.springintroduction.model.Order;
+import pl.dominisz.springintroduction.model.Receipt;
 import pl.dominisz.springintroduction.service.*;
+
+import java.time.LocalDate;
 
 public class Application {
 
@@ -14,6 +19,7 @@ public class Application {
         Receipt receipt = billingService.chargeOrder(order, creditCard);
 
         System.out.println(receipt);
+        LocalDate now = LocalDate.now();
     }
 
 }
