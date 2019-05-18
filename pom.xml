@@ -18,9 +18,15 @@
         <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>2.22.1</maven.surefire.plugin.version>
         <mockito.version>2.27.0</mockito.version>
+        <spring.context.version>5.1.7.RELEASE</spring.context.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId> spring-context</artifactId>
+            <version>${spring.context.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
