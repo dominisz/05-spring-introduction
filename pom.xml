@@ -35,7 +35,7 @@
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
                     <source>${java.version}</source>
-                    <excludes>${java.version}</excludes>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <plugin>
