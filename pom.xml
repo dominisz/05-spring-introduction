@@ -17,6 +17,7 @@
         <junit.jupiter.version>5.4.1</junit.jupiter.version>
         <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>2.22.1</maven.surefire.plugin.version>
+
     </properties>
 
     <dependencies>
@@ -27,12 +28,16 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
