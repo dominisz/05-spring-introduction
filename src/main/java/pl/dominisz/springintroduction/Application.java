@@ -13,12 +13,6 @@ public class Application {
 
     public static void main(String[] args) {
 
-        double suma = 0.0;
-        for (int i = 0; i < 10; i++) {
-            suma += 0.1;
-        }
-        System.out.println(suma);
-
         BillingService billingService = new CreditCardBillingService();
 
         Order order = new Order();
