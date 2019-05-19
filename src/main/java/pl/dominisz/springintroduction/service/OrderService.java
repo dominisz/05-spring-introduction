@@ -8,5 +8,5 @@ import pl.dominisz.springintroduction.model.Order;
  */
 public interface OrderService {
 
-    Order createOrder(Order order);
+    Order create(long userId, Order order);
 }

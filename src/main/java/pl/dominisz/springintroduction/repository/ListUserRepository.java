@@ -25,4 +25,10 @@ public class ListUserRepository implements UserRepository {
         return user;
     }
 
+    @Override
+    public boolean existsById(long userId) {
+        return users.stream()
+                .anyMatch(user -> user.getId() == userId);
+    }
+
 }
