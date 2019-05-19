@@ -26,6 +26,10 @@ public class Order {
         return items;
     }
 
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
+    }
+
     public void setUserId(long userId) {
         this.userId = userId;
     }

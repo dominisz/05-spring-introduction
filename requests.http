@@ -1,0 +1,35 @@
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "name": "Adam",
+  "email": "adam@gmail.com",
+  "creditCard": {
+    "firstName": "Adam",
+    "lastName": "Slodowy",
+    "number": "1234567890",
+    "expiryDate": "2022-04-01"
+  }
+}
+
+###
+
+POST http://localhost:8080/users/1/orders
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "description": "Zmywarka",
+      "quantity": 1,
+      "price": 1500
+    },
+    {
+      "description": "Lodowka",
+      "quantity": 1,
+      "price": 1333
+    }
+  ]
+}
+
+###
