@@ -8,5 +8,5 @@ import pl.dominisz.springintroduction.model.User;
  */
 public interface UserService {
 
-    User createUser(User user);
+    User create(User user);
 }
