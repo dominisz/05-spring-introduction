@@ -34,6 +34,7 @@ public class OrderServiceImpl implements OrderService {
             throw new UserNotFoundException(userId);
         }
 
+        order.setUserId(userId);
         return orderRepository.save(order);
     }
 }
