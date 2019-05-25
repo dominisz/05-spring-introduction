@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * 19.05.2019
  */
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class UserNotFoundException extends RuntimeException {
-    public UserNotFoundException(long userId) {
-        super("User with id " + userId + " not found");
+public class OrderNotFoundException extends RuntimeException {
+    public OrderNotFoundException(long orderId) {
+        super("Order with id " + orderId + " not found");
     }
 }

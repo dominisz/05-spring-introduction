@@ -5,6 +5,7 @@ import pl.dominisz.springintroduction.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * http://dominisz.pl
@@ -29,6 +30,11 @@ public class ListUserRepository implements UserRepository {
     public boolean existsById(long userId) {
         return users.stream()
                 .anyMatch(user -> user.getId() == userId);
+    }
+
+    @Override
+    public Optional<User> findById(long userId) {
+        return Optional.empty();
     }
 
 }
