@@ -36,7 +36,7 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     @Override
     public Optional<Receipt> findById(long id) {
-        return Optional.empty();
+        return receiptRepository.findById(id);
     }
 
     @Override
