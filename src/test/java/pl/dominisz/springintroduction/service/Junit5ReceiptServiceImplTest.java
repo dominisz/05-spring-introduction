@@ -1,6 +1,7 @@
 package pl.dominisz.springintroduction.service;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import pl.dominisz.springintroduction.dto.CreateReceiptDto;
@@ -9,6 +10,7 @@ import pl.dominisz.springintroduction.exception.UserNotFoundException;
 import pl.dominisz.springintroduction.model.Order;
 import pl.dominisz.springintroduction.model.User;
 import pl.dominisz.springintroduction.repository.OrderRepository;
+import pl.dominisz.springintroduction.repository.ReceiptRepository;
 import pl.dominisz.springintroduction.repository.UserRepository;
 
 import java.util.Optional;
@@ -22,16 +24,27 @@ public class Junit5ReceiptServiceImplTest {
     private final long USER_ID = 1;
     private final long ORDER_ID = 1;
 
-    private final UserRepository userRepository = Mockito.mock(UserRepository.class);
-    private final OrderRepository orderRepository = Mockito.mock(OrderRepository.class);
+    private UserRepository userRepository;
+    private OrderRepository orderRepository;
+    private BillingService billingService;
+    private ReceiptRepository receiptRepository;
+    private ReceiptServiceImpl receiptService;
+
+    @BeforeEach
+    public void setup() {
+        userRepository = Mockito.mock(UserRepository.class);
+        orderRepository = Mockito.mock(OrderRepository.class);
+        billingService = Mockito.mock(BillingService.class);
+        receiptRepository = Mockito.mock(ReceiptRepository.class);
+
+        receiptService = new ReceiptServiceImpl(billingService, orderRepository,
+                userRepository, receiptRepository);
+    }
 
     @Test
     public void shouldNotFoundUser() {
         Mockito.when(userRepository.findById(USER_ID))
                 .thenReturn(Optional.empty());
-
-        ReceiptServiceImpl receiptService =
-                new ReceiptServiceImpl(null, null, userRepository, null);
 
         CreateReceiptDto createReceiptDto = new CreateReceiptDto();
         createReceiptDto.setUserId(USER_ID);
@@ -49,9 +62,6 @@ public class Junit5ReceiptServiceImplTest {
 
         Mockito.when(orderRepository.findById(ORDER_ID))
                 .thenReturn(Optional.empty());
-
-        ReceiptServiceImpl receiptService =
-                new ReceiptServiceImpl(null, orderRepository, userRepository, null);
 
         CreateReceiptDto createReceiptDto = new CreateReceiptDto();
         createReceiptDto.setUserId(USER_ID);
