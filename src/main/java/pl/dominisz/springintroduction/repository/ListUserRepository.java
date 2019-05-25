@@ -34,7 +34,9 @@ public class ListUserRepository implements UserRepository {
 
     @Override
     public Optional<User> findById(long userId) {
-        return Optional.empty();
+        return users.stream()
+                .filter(user -> user.getId() == userId)
+                .findFirst();
     }
 
 }

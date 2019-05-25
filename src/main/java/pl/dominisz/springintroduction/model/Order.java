@@ -38,6 +38,10 @@ public class Order {
         this.id = id;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public BigDecimal getAmount() {
         BigDecimal sum = BigDecimal.ZERO;
 

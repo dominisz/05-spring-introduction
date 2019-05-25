@@ -1,13 +1,17 @@
 package pl.dominisz.springintroduction.model;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 
 /**
  * http://dominisz.pl
  * 18.05.2019
  */
+@Data
 public class Receipt {
 
+    private long id;
     private BigDecimal amount;
     private String message;
     private boolean successful;
@@ -16,27 +20,6 @@ public class Receipt {
         this.amount = amount;
         this.message = message;
         this.successful = successful;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public boolean isSuccessful() {
-        return successful;
-    }
-
-    @Override
-    public String toString() {
-        return "Receipt{" +
-                "amount=" + amount +
-                ", message='" + message + '\'' +
-                ", successful=" + successful +
-                '}';
     }
 
     public static Receipt forSuccessfulCharge(BigDecimal amount) {

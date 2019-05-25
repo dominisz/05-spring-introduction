@@ -5,6 +5,7 @@ import pl.dominisz.springintroduction.model.Order;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * http://dominisz.pl
@@ -22,5 +23,12 @@ public class ListOrderRepository implements OrderRepository {
         order.setId(lastId);
         orders.add(order);
         return order;
+    }
+
+    @Override
+    public Optional<Order> findById(long orderId) {
+        return orders.stream()
+                .filter(order -> order.getId() == orderId)
+                .findFirst();
     }
 }
