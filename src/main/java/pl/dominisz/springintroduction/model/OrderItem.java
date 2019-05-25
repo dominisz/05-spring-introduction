@@ -17,4 +17,10 @@ public class OrderItem {
     private int quantity;
     private BigDecimal price;
 
+    public OrderItem(String description, BigDecimal price) {
+      this.description = description;
+      this.quantity = 1;
+      this.price = price;
+    }
+
 }
