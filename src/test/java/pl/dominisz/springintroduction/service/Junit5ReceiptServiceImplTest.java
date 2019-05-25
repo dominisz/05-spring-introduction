@@ -17,6 +17,10 @@ import pl.dominisz.springintroduction.repository.UserRepository;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
+
 /**
  * http://dominisz.pl
  * 25.05.2019
@@ -64,29 +68,22 @@ public class Junit5ReceiptServiceImplTest {
 
     @Test
     public void shouldNotFoundUser() {
-        Mockito.when(userRepository.findById(USER_ID))
+        when(userRepository.findById(USER_ID))
                 .thenReturn(Optional.empty());
 
-        RuntimeException runtimeException = Assertions.assertThrows(UserNotFoundException.class,
+        RuntimeException runtimeException = assertThrows(UserNotFoundException.class,
                 () -> receiptService.create(createCreateReceiptDto()));
-        Assertions.assertEquals("User with id 1 not found", runtimeException.getMessage());
+        assertEquals("User with id 1 not found", runtimeException.getMessage());
     }
 
     @Test
     public void shouldNotFoundOrder() {
-        Mockito.when(userRepository.findById(USER_ID))
-                .thenReturn(Optional.of(new User()));
+        when(userRepository.findById(USER_ID)).thenReturn(Optional.of(createUser()));
+        when(orderRepository.findById(ORDER_ID)).thenReturn(Optional.empty());
 
-        Mockito.when(orderRepository.findById(ORDER_ID))
-                .thenReturn(Optional.empty());
-
-        CreateReceiptDto createReceiptDto = new CreateReceiptDto();
-        createReceiptDto.setUserId(USER_ID);
-        createReceiptDto.setOrderId(ORDER_ID);
-
-        RuntimeException runtimeException = Assertions.assertThrows(OrderNotFoundException.class,
-                () -> receiptService.create(createReceiptDto));
-        Assertions.assertEquals("Order with id 1 not found", runtimeException.getMessage());
+        RuntimeException runtimeException = assertThrows(OrderNotFoundException.class,
+                () -> receiptService.create(createCreateReceiptDto()));
+        assertEquals("Order with id 1 not found", runtimeException.getMessage());
     }
 
     @Test
