@@ -1,11 +1,16 @@
 package pl.dominisz.springintroduction.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
 /**
  * http://dominisz.pl
  * 18.05.2019
  */
+@Getter
+@Setter
 public class CreditCard {
 
     private String firstName;
@@ -13,27 +18,5 @@ public class CreditCard {
     private String number;
     private LocalDate expiryDate;
 
-    public CreditCard(String firstName, String lastName, String number, LocalDate expiryDate) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.number = number;
-        this.expiryDate = expiryDate;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public LocalDate getExpiryDate() {
-        return expiryDate;
-    }
 }
 

@@ -10,13 +10,28 @@ import pl.dominisz.springintroduction.model.User;
  */
 @Component
 public class UserConverterImpl implements UserConverter {
+
+    private final CreditCardConverter creditCardConverter;
+
+    public UserConverterImpl(CreditCardConverter creditCardConverter) {
+        this.creditCardConverter = creditCardConverter;
+    }
+
     @Override
     public UserEntity toEntity(User user) {
-        return null;
+        UserEntity userEntity = new UserEntity();
+
+        userEntity.setName(user.getName());
+        userEntity.setEmail(user.getEmail());
+        userEntity.setCreditCard(creditCardConverter.toEntity(user.getCreditCard()));
+
+        return userEntity;
     }
 
     @Override
     public User toUser(UserEntity userEntity) {
-        return null;
+        User user = new User();
+
+        return user;
     }
 }
