@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     public UserServiceImpl(UserEntityRepository userEntityRepository,
-                           UserConverter userConverter) {
+                           Converter<User, UserEntity> userConverter) {
         this.userEntityRepository = userEntityRepository;
         this.userConverter = userConverter;
     }
