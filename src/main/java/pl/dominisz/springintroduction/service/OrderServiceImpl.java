@@ -20,7 +20,8 @@ public class OrderServiceImpl implements OrderService {
     private final Converter<Order, OrderEntity> orderConverter;
 
     @Autowired
-    public OrderServiceImpl(UserEntityRepository userEntityRepository, Converter<Order, OrderEntity> orderConverter) {
+    public OrderServiceImpl(UserEntityRepository userEntityRepository,
+                            Converter<Order, OrderEntity> orderConverter) {
         this.userEntityRepository = userEntityRepository;
         this.orderConverter = orderConverter;
     }
