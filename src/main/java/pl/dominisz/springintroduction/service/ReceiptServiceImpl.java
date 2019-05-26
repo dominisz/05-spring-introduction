@@ -6,6 +6,7 @@ import pl.dominisz.springintroduction.converter.Converter;
 import pl.dominisz.springintroduction.dto.CreateReceiptDto;
 import pl.dominisz.springintroduction.entity.CreditCardEntity;
 import pl.dominisz.springintroduction.entity.OrderEntity;
+import pl.dominisz.springintroduction.entity.ReceiptEntity;
 import pl.dominisz.springintroduction.entity.UserEntity;
 import pl.dominisz.springintroduction.exception.OrderNotFoundException;
 import pl.dominisz.springintroduction.exception.UserNotFoundException;
@@ -13,10 +14,7 @@ import pl.dominisz.springintroduction.model.CreditCard;
 import pl.dominisz.springintroduction.model.Order;
 import pl.dominisz.springintroduction.model.Receipt;
 import pl.dominisz.springintroduction.model.User;
-import pl.dominisz.springintroduction.repository.OrderRepository;
-import pl.dominisz.springintroduction.repository.ReceiptRepository;
-import pl.dominisz.springintroduction.repository.UserEntityRepository;
-import pl.dominisz.springintroduction.repository.UserRepository;
+import pl.dominisz.springintroduction.repository.*;
 
 import java.util.Optional;
 
@@ -50,7 +48,8 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     @Override
     public Optional<Receipt> findById(long id) {
-        return receiptConverter.toModel(receiptEntityRepository.findById(id));
+        return receiptEntityRepository.findById(id)
+                .map(receiptEntity -> receiptConverter.toModel(receiptEntity));
     }
 
     @Override
