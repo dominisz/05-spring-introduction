@@ -2,14 +2,20 @@ package pl.dominisz.springintroduction.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.dominisz.springintroduction.converter.Converter;
 import pl.dominisz.springintroduction.dto.CreateReceiptDto;
+import pl.dominisz.springintroduction.entity.CreditCardEntity;
+import pl.dominisz.springintroduction.entity.OrderEntity;
+import pl.dominisz.springintroduction.entity.UserEntity;
 import pl.dominisz.springintroduction.exception.OrderNotFoundException;
 import pl.dominisz.springintroduction.exception.UserNotFoundException;
+import pl.dominisz.springintroduction.model.CreditCard;
 import pl.dominisz.springintroduction.model.Order;
 import pl.dominisz.springintroduction.model.Receipt;
 import pl.dominisz.springintroduction.model.User;
 import pl.dominisz.springintroduction.repository.OrderRepository;
 import pl.dominisz.springintroduction.repository.ReceiptRepository;
+import pl.dominisz.springintroduction.repository.UserEntityRepository;
 import pl.dominisz.springintroduction.repository.UserRepository;
 
 import java.util.Optional;
@@ -22,35 +28,51 @@ import java.util.Optional;
 public class ReceiptServiceImpl implements ReceiptService {
 
     private final BillingService billingService;
-    private final OrderRepository orderRepository;
-    private final UserRepository userRepository;
-    private final ReceiptRepository receiptRepository;
+    private final UserEntityRepository userEntityRepository;
+    private final ReceiptEntityRepository receiptEntityRepository;
+    private final Converter<Order, OrderEntity> orderConverter;
+    private final Converter<CreditCard, CreditCardEntity> creditCardConverter;
+    private final Converter<Receipt, ReceiptEntity> receiptConverter;
 
-    @Autowired
-    public ReceiptServiceImpl(BillingService billingService, OrderRepository orderRepository, UserRepository userRepository, ReceiptRepository receiptRepository) {
+    public ReceiptServiceImpl(BillingService billingService,
+                              UserEntityRepository userEntityRepository,
+                              ReceiptEntityRepository receiptEntityRepository,
+                              Converter<Order, OrderEntity> orderConverter,
+                              Converter<CreditCard, CreditCardEntity> creditCardConverter,
+                              Converter<Receipt, ReceiptEntity> receiptConverter) {
         this.billingService = billingService;
-        this.orderRepository = orderRepository;
-        this.userRepository = userRepository;
-        this.receiptRepository = receiptRepository;
+        this.userEntityRepository = userEntityRepository;
+        this.receiptEntityRepository = receiptEntityRepository;
+        this.orderConverter = orderConverter;
+        this.creditCardConverter = creditCardConverter;
+        this.receiptConverter = receiptConverter;
     }
 
     @Override
     public Optional<Receipt> findById(long id) {
-        return receiptRepository.findById(id);
+        return receiptConverter.toModel(receiptEntityRepository.findById(id));
     }
 
     @Override
     public Receipt create(CreateReceiptDto createReceiptDto) {
-        User user = userRepository
+        UserEntity userEntity = userEntityRepository
                 .findById(createReceiptDto.getUserId())
                 .orElseThrow(() -> new UserNotFoundException(createReceiptDto.getUserId()));
 
-        Order order = orderRepository
-                .findById(createReceiptDto.getOrderId())
+        OrderEntity orderEntity = userEntity.getOrders().stream()
+                .filter(orderEntity1 -> orderEntity1.getId().equals(createReceiptDto.getOrderId()))
+                .findFirst()
                 .orElseThrow(() -> new OrderNotFoundException(createReceiptDto.getOrderId()));
 
-        Receipt receipt = billingService.chargeOrder(order, user.getCreditCard());
+        Order order = orderConverter.toModel(orderEntity);
+        CreditCard creditCard = creditCardConverter.toModel(userEntity.getCreditCard());
 
-        return receiptRepository.save(receipt);
+        Receipt receipt = billingService.chargeOrder(order, creditCard);
+
+        ReceiptEntity receiptEntity = receiptConverter.toEntity(receipt);
+
+        receiptEntity = receiptEntityRepository.save(receiptEntity);
+
+        return receiptConverter.toModel(receiptEntity);
     }
 }
