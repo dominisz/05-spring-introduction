@@ -25,28 +25,22 @@ public class OrderConverter implements Converter<Order, OrderEntity> {
     @Override
     public Order toModel(OrderEntity entity) {
         Order order = new Order();
-
         order.setId(entity.getId());
         order.setUserId(entity.getUser().getId());
-
         List<OrderItem> orderItems = entity.getItems().stream()
                 .map(orderItemEntity -> orderItemConverter.toModel(orderItemEntity))
                 .collect(Collectors.toList());
         order.setItems(orderItems);
-
         return order;
     }
 
     @Override
     public OrderEntity toEntity(Order order) {
         OrderEntity orderEntity = new OrderEntity();
-
         List<OrderItemEntity> orderItems = order.getItems().stream()
                 .map(orderItem -> orderItemConverter.toEntity(orderItem))
                 .collect(Collectors.toList());
-
         orderEntity.setItems(orderItems);
-
         return orderEntity;
     }
 }

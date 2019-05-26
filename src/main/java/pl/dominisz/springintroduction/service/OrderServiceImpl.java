@@ -7,6 +7,7 @@ import pl.dominisz.springintroduction.entity.OrderEntity;
 import pl.dominisz.springintroduction.entity.UserEntity;
 import pl.dominisz.springintroduction.exception.UserNotFoundException;
 import pl.dominisz.springintroduction.model.Order;
+import pl.dominisz.springintroduction.repository.OrderEntityRepository;
 import pl.dominisz.springintroduction.repository.UserEntityRepository;
 
 /**
@@ -17,12 +18,15 @@ import pl.dominisz.springintroduction.repository.UserEntityRepository;
 public class OrderServiceImpl implements OrderService {
 
     private final UserEntityRepository userEntityRepository;
+    private final OrderEntityRepository orderEntityRepository;
     private final Converter<Order, OrderEntity> orderConverter;
 
     @Autowired
     public OrderServiceImpl(UserEntityRepository userEntityRepository,
+                            OrderEntityRepository orderEntityRepository,
                             Converter<Order, OrderEntity> orderConverter) {
         this.userEntityRepository = userEntityRepository;
+        this.orderEntityRepository = orderEntityRepository;
         this.orderConverter = orderConverter;
     }
 
@@ -31,9 +35,12 @@ public class OrderServiceImpl implements OrderService {
         UserEntity user = userEntityRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
         OrderEntity orderEntity = orderConverter.toEntity(order);
-        user.getOrders().add(orderEntity);
         orderEntity.setUser(user);
+        orderEntity = orderEntityRepository.save(orderEntity);
+
+        user.getOrders().add(orderEntity);
         userEntityRepository.save(user);
+
         return orderConverter.toModel(orderEntity);
     }
 }
