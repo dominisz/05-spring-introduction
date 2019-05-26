@@ -28,16 +28,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order create(long userId, Order order) {
-        //znaleźć użytkownika o userId
         UserEntity user = userEntityRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
-        //zamienić Order na OrderEntity uwzględniając OrderItemEntity
         OrderEntity orderEntity = orderConverter.toEntity(order);
-        //dodać Order do User
         user.getOrders().add(orderEntity);
-        //zapisać User
+        orderEntity.setUser(user);
         userEntityRepository.save(user);
-        //zamienić Order na OrderEntity i zwrócić
         return orderConverter.toModel(orderEntity);
     }
 }

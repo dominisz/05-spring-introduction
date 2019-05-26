@@ -1,5 +1,6 @@
 package pl.dominisz.springintroduction.converter;
 
+import org.springframework.stereotype.Component;
 import pl.dominisz.springintroduction.entity.OrderEntity;
 import pl.dominisz.springintroduction.entity.OrderItemEntity;
 import pl.dominisz.springintroduction.model.Order;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
  * http://dominisz.pl
  * 26.05.2019
  */
+@Component
 public class OrderConverter implements Converter<Order, OrderEntity> {
 
     private final Converter<OrderItem, OrderItemEntity> orderItemConverter;
