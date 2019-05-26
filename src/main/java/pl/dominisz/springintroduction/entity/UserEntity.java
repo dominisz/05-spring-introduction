@@ -5,10 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import pl.dominisz.springintroduction.model.CreditCard;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * http://dominisz.pl
@@ -28,5 +26,8 @@ public class UserEntity {
 
     @Embedded
     private CreditCardEntity creditCard;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<OrderEntity> orders;
 
 }
