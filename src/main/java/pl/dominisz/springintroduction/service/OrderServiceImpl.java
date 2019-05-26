@@ -4,11 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.dominisz.springintroduction.exception.UserNotFoundException;
 import pl.dominisz.springintroduction.model.Order;
-import pl.dominisz.springintroduction.model.User;
-import pl.dominisz.springintroduction.repository.OrderRepository;
-import pl.dominisz.springintroduction.repository.UserRepository;
-
-import java.util.Optional;
+import pl.dominisz.springintroduction.repository.UserEntityRepository;
 
 /**
  * http://dominisz.pl
@@ -17,24 +13,20 @@ import java.util.Optional;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    private final OrderRepository orderRepository;
-    private final UserRepository userRepository;
+    private final UserEntityRepository userEntityRepository;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, UserRepository userRepository) {
-        this.orderRepository = orderRepository;
-        this.userRepository = userRepository;
+    public OrderServiceImpl(UserEntityRepository userEntityRepository) {
+        this.userEntityRepository = userEntityRepository;
     }
 
     @Override
     public Order create(long userId, Order order) {
-        boolean userExist = userRepository.existsById(userId);
-
-        if (!userExist) {
-            throw new UserNotFoundException(userId);
-        }
-
-        order.setUserId(userId);
-        return orderRepository.save(order);
+        //znaleźć użytkownika o userId
+        //zamienić Order na OrderEntity uwzględniając OrderItemEntity
+        //dodać Order do User
+        //zapisać User
+        //zamienić Order na OrderEntity i zwrócić
+        return null;
     }
 }
