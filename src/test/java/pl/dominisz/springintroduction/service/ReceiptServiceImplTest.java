@@ -21,17 +21,17 @@ public class ReceiptServiceImplTest {
 
     @Test(expected = UserNotFoundException.class)
     public void shouldNotFoundUser() {
-        Mockito.when(userRepository.findById(USER_ID))
-                .thenReturn(Optional.empty());
-
-        ReceiptServiceImpl receiptService =
-                new ReceiptServiceImpl(null, null, userRepository, null);
-
-        CreateReceiptDto createReceiptDto = new CreateReceiptDto();
-        createReceiptDto.setUserId(USER_ID);
-        createReceiptDto.setOrderId(ORDER_ID);
-
-        receiptService.create(createReceiptDto);
+//        Mockito.when(userRepository.findById(USER_ID))
+//                .thenReturn(Optional.empty());
+//
+//        ReceiptServiceImpl receiptService =
+//                new ReceiptServiceImpl(null, null, userRepository, null);
+//
+//        CreateReceiptDto createReceiptDto = new CreateReceiptDto();
+//        createReceiptDto.setUserId(USER_ID);
+//        createReceiptDto.setOrderId(ORDER_ID);
+//
+//        receiptService.create(createReceiptDto);
     }
 
     @Test

@@ -1,6 +1,7 @@
 package pl.dominisz.springintroduction.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -9,6 +10,7 @@ import java.math.BigDecimal;
  * 18.05.2019
  */
 @Data
+@NoArgsConstructor
 public class Receipt {
 
     private long id;

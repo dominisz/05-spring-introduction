@@ -52,8 +52,8 @@ public class Junit5ReceiptServiceImplTest {
         billingService = Mockito.mock(BillingService.class);
         receiptRepository = Mockito.mock(ReceiptRepository.class);
 
-        receiptService = new ReceiptServiceImpl(billingService, orderRepository,
-                userRepository, receiptRepository);
+//        receiptService = new ReceiptServiceImpl(billingService, orderRepository,
+//                userRepository, receiptRepository);
     }
 
     private CreateReceiptDto createCreateReceiptDto() {
