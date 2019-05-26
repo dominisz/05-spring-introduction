@@ -2,11 +2,11 @@ package pl.dominisz.springintroduction.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.dominisz.springintroduction.converter.Converter;
 import pl.dominisz.springintroduction.converter.UserConverter;
 import pl.dominisz.springintroduction.entity.UserEntity;
 import pl.dominisz.springintroduction.model.User;
 import pl.dominisz.springintroduction.repository.UserEntityRepository;
-import pl.dominisz.springintroduction.repository.UserRepository;
 
 /**
  * http://dominisz.pl
@@ -16,7 +16,7 @@ import pl.dominisz.springintroduction.repository.UserRepository;
 public class UserServiceImpl implements UserService {
 
     private final UserEntityRepository userEntityRepository;
-    private final UserConverter userConverter;
+    private final Converter<User, UserEntity> userConverter;
 
     @Autowired
     public UserServiceImpl(UserEntityRepository userEntityRepository,
@@ -31,6 +31,6 @@ public class UserServiceImpl implements UserService {
 
         userEntity = userEntityRepository.save(userEntity);
 
-        return userConverter.toUser(userEntity);
+        return userConverter.toModel(userEntity);
     }
 }
