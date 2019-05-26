@@ -25,5 +25,12 @@ public class CreditCardConverterImpl implements CreditCardConverter {
     @Override
     public CreditCard toCreditCard(CreditCardEntity creditCardEntity) {
         CreditCard creditCard = new CreditCard();
+
+        creditCard.setFirstName(creditCardEntity.getFirstName());
+        creditCard.setLastName(creditCardEntity.getLastName());
+        creditCard.setExpiryDate(creditCardEntity.getExpiryDate());
+        creditCard.setNumber(creditCardEntity.getNumber());
+
+        return creditCard;
     }
 }

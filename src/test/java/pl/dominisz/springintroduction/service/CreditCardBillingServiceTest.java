@@ -15,6 +15,11 @@ import java.time.LocalDate;
  */
 public class CreditCardBillingServiceTest {
 
+    private static final String FIRST_NAME = "firstName";
+    private static final String LAST_NAME = "lastName";
+    private static final String NUMBER = "123567890";
+    private static final LocalDate EXPIRY_DATE = LocalDate.of(2020, 1, 1);
+
     @Test
     void shouldSuccessfullyChargeCard() {
         Order order = new Order();
@@ -23,7 +28,7 @@ public class CreditCardBillingServiceTest {
         order.addItem(hotDog);
         order.addItem(coffee);
 
-        CreditCard creditCard = new CreditCard("Imie", "Nazwisko", "123", LocalDate.of(2022, 5, 1));
+        CreditCard creditCard = createCreditCard();
 
         CreditCardProcessor creditCardProcessor = Mockito.mock(CreditCardProcessor.class);
         Mockito.when(creditCardProcessor.charge(creditCard, order.getAmount()))
@@ -46,7 +51,7 @@ public class CreditCardBillingServiceTest {
         order.addItem(hotDog);
         order.addItem(coffee);
 
-        CreditCard creditCard = new CreditCard("Imie", "Nazwisko", "123", LocalDate.of(2022, 5, 1));
+        CreditCard creditCard = createCreditCard();
 
         CreditCardProcessor creditCardProcessor = Mockito.mock(CreditCardProcessor.class);
         Mockito.when(creditCardProcessor.charge(creditCard, order.getAmount()))
@@ -61,6 +66,15 @@ public class CreditCardBillingServiceTest {
         Assertions.assertEquals("error", receipt.getMessage());
     }
 
+    private CreditCard createCreditCard() {
+        CreditCard creditCard = new CreditCard();
+        creditCard.setFirstName(FIRST_NAME);
+        creditCard.setLastName(LAST_NAME);
+        creditCard.setNumber(NUMBER);
+        creditCard.setExpiryDate(EXPIRY_DATE);
+        return creditCard;
+    }
+
     @Test
     void shouldFailCharge() {
         Order order = new Order();
@@ -69,7 +83,7 @@ public class CreditCardBillingServiceTest {
         order.addItem(hotDog);
         order.addItem(coffee);
 
-        CreditCard creditCard = new CreditCard("Imie", "Nazwisko", "123", LocalDate.of(2022, 5, 1));
+        CreditCard creditCard = createCreditCard();
 
         CreditCardProcessor creditCardProcessor = Mockito.mock(CreditCardProcessor.class);
         Mockito.when(creditCardProcessor.charge(creditCard, order.getAmount()))

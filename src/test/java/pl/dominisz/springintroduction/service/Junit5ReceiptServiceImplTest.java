@@ -66,8 +66,17 @@ public class Junit5ReceiptServiceImplTest {
     private User createUser() {
         User user = new User();
         user.setId(USER_ID);
-        user.setCreditCard(new CreditCard(FIRST_NAME, LAST_NAME, NUMBER, EXPIRY_DATE));
+        user.setCreditCard(createCreditCard());
         return user;
+    }
+
+    private CreditCard createCreditCard() {
+        CreditCard creditCard = new CreditCard();
+        creditCard.setFirstName(FIRST_NAME);
+        creditCard.setLastName(LAST_NAME);
+        creditCard.setNumber(NUMBER);
+        creditCard.setExpiryDate(EXPIRY_DATE);
+        return creditCard;
     }
 
     @Test

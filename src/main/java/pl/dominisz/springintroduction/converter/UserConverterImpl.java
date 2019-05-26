@@ -32,6 +32,11 @@ public class UserConverterImpl implements UserConverter {
     public User toUser(UserEntity userEntity) {
         User user = new User();
 
+        user.setId(userEntity.getId());
+        user.setName(userEntity.getName());
+        user.setEmail(userEntity.getEmail());
+        user.setCreditCard(creditCardConverter.toCreditCard(userEntity.getCreditCard()));
+
         return user;
     }
 }
