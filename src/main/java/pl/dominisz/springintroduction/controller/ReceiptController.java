@@ -7,8 +7,6 @@ import pl.dominisz.springintroduction.dto.CreateReceiptDto;
 import pl.dominisz.springintroduction.model.Receipt;
 import pl.dominisz.springintroduction.service.ReceiptService;
 
-import java.util.Optional;
-
 /**
  * http://dominisz.pl
  * 19.05.2019

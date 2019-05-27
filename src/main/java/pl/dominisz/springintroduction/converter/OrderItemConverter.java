@@ -2,7 +2,6 @@ package pl.dominisz.springintroduction.converter;
 
 import org.springframework.stereotype.Component;
 import pl.dominisz.springintroduction.entity.OrderItemEntity;
-import pl.dominisz.springintroduction.model.Order;
 import pl.dominisz.springintroduction.model.OrderItem;
 
 /**

@@ -1,5 +1,8 @@
 package pl.dominisz.springintroduction.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,38 +11,16 @@ import java.util.List;
  * http://dominisz.pl
  * 18.05.2019
  */
+@Getter
+@Setter
 public class Order {
 
     private long id;
     private long userId;
-    private List<OrderItem> items;
-
-    public Order() {
-        items = new ArrayList<>();
-    }
+    private List<OrderItem> items = new ArrayList<>();
 
     public void addItem(OrderItem orderItem) {
         items.add(orderItem);
-    }
-
-    public List<OrderItem> getItems() {
-        return items;
-    }
-
-    public void setItems(List<OrderItem> items) {
-        this.items = items;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public BigDecimal getAmount() {

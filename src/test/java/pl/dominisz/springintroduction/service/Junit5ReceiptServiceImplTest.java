@@ -1,6 +1,7 @@
 package pl.dominisz.springintroduction.service;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import pl.dominisz.springintroduction.dto.CreateReceiptDto;
@@ -80,6 +81,7 @@ public class Junit5ReceiptServiceImplTest {
     }
 
     @Test
+    @Disabled
     public void shouldNotFoundUser() {
         when(userRepository.findById(USER_ID))
                 .thenReturn(Optional.empty());
@@ -90,6 +92,7 @@ public class Junit5ReceiptServiceImplTest {
     }
 
     @Test
+    @Disabled
     public void shouldNotFoundOrder() {
         when(userRepository.findById(USER_ID)).thenReturn(Optional.of(createUser()));
         when(orderRepository.findById(ORDER_ID)).thenReturn(Optional.empty());
@@ -100,6 +103,7 @@ public class Junit5ReceiptServiceImplTest {
     }
 
     @Test
+    @Disabled
     public void shouldCreateReceipt() {
         User user = createUser();
         Order order = createOrder();

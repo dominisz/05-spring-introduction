@@ -1,9 +1,7 @@
 package pl.dominisz.springintroduction.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import pl.dominisz.springintroduction.model.CreditCard;
 
 import javax.persistence.*;
 import java.util.List;

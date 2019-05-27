@@ -2,11 +2,8 @@ package pl.dominisz.springintroduction.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.dominisz.springintroduction.model.OrderItem;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
